@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tom Telfer — East Bay &amp; San Francisco Real Estate</title>
+<meta name="description" content="Tom Telfer. Real estate across the East Bay and San Francisco, with Compass. A new site is on the way.">
+<meta property="og:title" content="Tom Telfer — East Bay &amp; San Francisco Real Estate">
+<meta property="og:description" content="A new site is on the way.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F1EA;
+    --paper: #FBF8F3;
+    --ink: #1F1D1A;
+    --ink-soft: #5A554E;
+    --ink-muted: #8B857C;
+    --rule: #D9D2C5;
+    --accent: #6B4423;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Subtle paper texture via layered gradients */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(210, 195, 170, 0.15), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(180, 160, 130, 0.1), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid var(--rule);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.1s forwards;
+  }
+
+  .mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(3rem, 10vh, 6rem) 0;
+    max-width: 920px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.4s forwards;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 0.5px;
+    background: var(--ink-soft);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6.5vw, 4.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin-bottom: 2rem;
+    color: var(--ink);
+    opacity: 0;
+    animation: rise 1s ease-out 0.55s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .lede {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: rise 1s ease-out 0.7s forwards;
+  }
+
+  .signature {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding-top: 2.5rem;
+    border-top: 0.5px solid var(--rule);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.9s forwards;
+  }
+
+  .sig-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .sig-detail {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--rule);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 1.1s forwards;
+  }
+
+  footer a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  footer a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  /* Compass tag */
+  .compass-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .compass-tag::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    header {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    footer {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .signature {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <div class="mark">Tom Telfer</div>
+      <div class="meta">East Bay &amp; San Francisco</div>
+    </header>
+
+    <main>
+      <div class="eyebrow">A new site, coming soon</div>
+
+      <h1>Real estate is a <em>relationship</em>, not a transaction.</h1>
+
+      <p class="lede">
+        For more than two decades, I've helped buyers and sellers across the East Bay and San Francisco
+        move thoughtfully &mdash; with patience, candor, and care. A new home for that work is on its way.
+      </p>
+
+      <div class="signature">
+        <div class="sig-name">Tom Telfer</div>
+        <div class="sig-detail">Compass &middot; East Bay &amp; San Francisco</div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="compass-tag">In the meantime, reach out anytime.</div>
+      <a href="mailto:tom@telferpro.com">tom@telferpro.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
